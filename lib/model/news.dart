@@ -1,7 +1,7 @@
 class NewsArticle {
   int id;
   int publish;
-  String date;
+  DateTime date;
   String author;
   String twitter;
   String hyphenated;
@@ -14,7 +14,7 @@ class NewsArticle {
   NewsArticle(Map<String, dynamic> json)
       : this.id = json['id'],
         this.publish = json['Publish'],
-        this.date = json['Date'],
+        this.date = DateTime.parse(json['Date']),
         this.author = json['Author'],
         this.twitter = json['Twitter'],
         this.hyphenated = json['hyphenated'],
