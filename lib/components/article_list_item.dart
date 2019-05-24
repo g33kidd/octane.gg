@@ -30,7 +30,9 @@ class ArticleListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               // TODO somehow load the images faster when scrolling, lazy loading or whatever. Maybe cache.
-              Image.network(article.image),
+              Image(
+                image: NetworkImage(article.image),
+              ),
               Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Row(
