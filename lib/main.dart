@@ -5,8 +5,18 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:octane_gg/model/news.dart';
 import 'package:intl/intl.dart';
 import 'package:octane_gg/screens/home.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(Octane());
+void main() => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            builder: (_) => NewsModel(),
+          )
+        ],
+        child: Octane(),
+      ),
+    );
 
 class Octane extends StatelessWidget {
   @override
