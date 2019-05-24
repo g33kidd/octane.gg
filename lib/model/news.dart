@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
+import 'package:octane_gg/api.dart';
 
 const apiBase = "https://api.octane.gg/api";
 
@@ -40,15 +41,9 @@ class NewsModel extends ChangeNotifier {
       UnmodifiableListView(_articles);
 
   void getNews() async {
-    var resp = await http.get("$apiBase/news");
-    if (resp.statusCode == 200) {
-      String body = resp.body;
-      var respJson = json.decode(body);
-      for (var article in respJson['data']) {
-        _articles.add(NewsArticle(article));
-      }
-      loaded = true;
-      notifyListeners();
-    }
+    final news = await API.getNews();
+    _articles.addAll(news);
+    loaded = true;
+    notifyListeners();
   }
 }
