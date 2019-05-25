@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:octane_gg/model/news.dart';
+import 'package:octane_gg/model/participant.dart';
 
 class APIError {
   final String err;
@@ -66,5 +67,13 @@ class API {
       _articles.add(NewsArticle(article));
     }
     return _articles;
+  }
+
+  static Future<List<Participant>> getPlayers() async {
+    final List<Participant> _players = [];
+    final responseJSON = await request(players);
+    for (var player in responseJSON['data']) {
+      _players.add(Participant(player));
+    }
   }
 }
