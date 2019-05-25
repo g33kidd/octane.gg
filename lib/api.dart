@@ -75,5 +75,6 @@ class API {
     for (var player in responseJSON['data']) {
       _players.add(Participant(player));
     }
+    return _players;
   }
 }
