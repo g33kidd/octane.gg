@@ -28,6 +28,9 @@ class Player {
   int sub2;
   int newPlayer;
 
+  String get image =>
+      Uri.encodeFull("https://octane.gg/player-pictures/$player.png");
+
   Player(Map<String, dynamic> data)
       : playerId = data['player_id'],
         player = data['player'],
@@ -53,6 +56,9 @@ class Team {
   String type;
   String twitter;
   String site;
+
+  String get icon => Uri.encodeFull("https://octane.gg/team-icons/$team.png");
+  String get logo => Uri.encodeFull("https://octane.gg/team-logos/$team.png");
 
   static Region getRegion(String _region) {
     switch (_region) {
