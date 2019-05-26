@@ -10,8 +10,8 @@ class Participant {
   String name;
 
   Participant(Map<String, dynamic> participant)
-      : this.type = participant['Type'],
-        this.name = participant['Name'];
+      : this.type = participant['type'],
+        this.name = participant['name'];
 }
 
 enum Region { NA, EU, OCE }
@@ -27,11 +27,21 @@ class ParticipantModel extends ChangeNotifier {
 
   UnmodifiableListView<Participant> get participants =>
       UnmodifiableListView(_participants);
+  UnmodifiableListView<Player> get players => UnmodifiableListView(_players);
+  UnmodifiableListView<Team> get teams => UnmodifiableListView(_teams);
 
   Future getAll() async {
     await getParticipants();
-    // await getTeams();
-    // await getPlayers();
+    await getPlayers();
+  }
+
+  Future getPlayers() async {
+    final players = await API.getPlayersDetail();
+    playersLoaded = true;
+    _players
+      ..clear()
+      ..addAll(players);
+    notifyListeners();
   }
 
   Future getParticipants() async {
@@ -72,7 +82,7 @@ class Player {
         player = data['player'],
         name = data['name'],
         country = data['country'],
-        birthday = data['birthday'],
+        birthday = DateTime.parse(data['birthday']),
         team = data['team'],
         secondary = data['secondary'],
         twitter = data['twitter'],

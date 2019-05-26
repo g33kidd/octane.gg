@@ -29,6 +29,7 @@ class API {
   static String get match => "$base/match";
   static String get series => "$base/series";
   static String get h2h => "$base/head_to_head";
+  static String get playersDetail => "$base/players";
 
   static dynamic request(endpoint) async {
     final http.Response response = await http.get(endpoint);
@@ -85,5 +86,14 @@ class API {
       _teams.add(Participant(team));
     }
     return _teams;
+  }
+
+  static Future<List<Player>> getPlayersDetail() async {
+    final List<Player> _players = [];
+    final resJSON = await request(playersDetail);
+    for (var p in resJSON['data']) {
+      _players.add(Player(p));
+    }
+    return _players;
   }
 }

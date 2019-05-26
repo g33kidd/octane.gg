@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:octane_gg/components/app_scaffold.dart';
 import 'package:octane_gg/components/article_list_item.dart';
 import 'package:octane_gg/model/news.dart';
 import 'package:provider/provider.dart';
@@ -30,11 +31,9 @@ class _HomeState extends State<Home> {
           child: CircularProgressIndicator(),
         );
 
-        return Scaffold(
-          appBar: AppBar(
-            title: Text("Octane"),
-          ),
-          body: (news.loaded) ? articleList : loading,
+        return AppScaffold(
+          title: "Octane",
+          child: (news.loaded) ? articleList : loading,
         );
       },
     );

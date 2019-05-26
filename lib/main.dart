@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:octane_gg/model/news.dart';
 import 'package:octane_gg/model/participant.dart';
 import 'package:octane_gg/screens/home.dart';
+import 'package:octane_gg/screens/players.dart';
 import 'package:octane_gg/screens/splash.dart';
 import 'package:provider/provider.dart';
 
@@ -35,6 +36,10 @@ class Octane extends StatelessWidget {
           color: Color(0xFF2e3f52),
         ),
       ),
+      routes: {
+        '/players': (_) => PlayersScreen(),
+        // '/teams': TeamsScreen(),
+      },
     );
   }
 }
