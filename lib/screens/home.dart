@@ -15,33 +15,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    Provider.of<NewsModel>(context).getNews();
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Consumer<NewsModel>(
       builder: (context, news, child) {
+        final articleList = ListView.builder(
+          itemCount: news.articles.length,
+          itemBuilder: (context, index) {
+            final article = news.articles[index];
+            return ArticleListItem(article: article);
+          },
+        );
+
+        final loading = Center(
+          child: CircularProgressIndicator(),
+        );
+
         return Scaffold(
           appBar: AppBar(
             title: Text("Octane"),
           ),
-          body: (news.loaded)
-              ? ListView.builder(
-                  itemCount: news.articles.length,
-                  itemBuilder: (context, index) {
-                    final article = news.articles[index];
-                    return ArticleListItem(article: article);
-                  },
-                )
-              : Text("Loading..."),
+          body: (news.loaded) ? articleList : loading,
         );
       },
     );

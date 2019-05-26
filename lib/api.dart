@@ -77,4 +77,13 @@ class API {
     }
     return _players;
   }
+
+  static Future<List<Participant>> getTeams() async {
+    final List<Participant> _teams = [];
+    final responseJSON = await request(teams);
+    for (var team in responseJSON['data']) {
+      _teams.add(Participant(team));
+    }
+    return _teams;
+  }
 }

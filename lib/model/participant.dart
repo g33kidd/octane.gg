@@ -1,3 +1,8 @@
+import 'dart:collection';
+
+import 'package:flutter/cupertino.dart';
+import 'package:octane_gg/api.dart';
+
 enum PlayerType { Player, Team }
 
 class Participant {
@@ -10,6 +15,37 @@ class Participant {
 }
 
 enum Region { NA, EU, OCE }
+
+class ParticipantModel extends ChangeNotifier {
+  final List<Participant> _participants = [];
+  final List<Team> _teams = [];
+  final List<Player> _players = [];
+
+  bool participantsLoaded = false;
+  bool playersLoaded = false;
+  bool teamsLoaded = false;
+
+  UnmodifiableListView<Participant> get participants =>
+      UnmodifiableListView(_participants);
+
+  Future getAll() async {
+    await getParticipants();
+    // await getTeams();
+    // await getPlayers();
+  }
+
+  Future getParticipants() async {
+    final players = await API.getPlayers();
+    final teams = await API.getTeams();
+
+    participantsLoaded = true;
+    _participants
+      ..clear()
+      ..addAll([...players, ...teams]);
+
+    notifyListeners();
+  }
+}
 
 class Player {
   int playerId;
