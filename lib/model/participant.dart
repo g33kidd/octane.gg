@@ -33,6 +33,7 @@ class ParticipantModel extends ChangeNotifier {
   Future getAll() async {
     await getParticipants();
     await getPlayers();
+    await getTeams();
   }
 
   Future getPlayers() async {
@@ -41,6 +42,15 @@ class ParticipantModel extends ChangeNotifier {
     _players
       ..clear()
       ..addAll(players);
+    notifyListeners();
+  }
+
+  Future getTeams() async {
+    final teams = await API.getTeamsDetail();
+    teamsLoaded = true;
+    _teams
+      ..clear()
+      ..addAll(teams);
     notifyListeners();
   }
 

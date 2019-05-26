@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:octane_gg/components/app_scaffold.dart';
 import 'package:octane_gg/model/participant.dart';
 import 'package:provider/provider.dart';
 
 class PlayersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Players"),
-      ),
-      body: Consumer<ParticipantModel>(
+    return AppScaffold(
+      title: "Players",
+      child: Consumer<ParticipantModel>(
         builder: (context, participant, child) {
-          if (participant.participantsLoaded) {
+          if (participant.playersLoaded) {
             return ListView.builder(
               itemCount: participant.participants.length,
               itemBuilder: (context, index) {
@@ -26,6 +25,6 @@ class PlayersScreen extends StatelessWidget {
           }
         },
       ),
-    );
+    )
   }
 }

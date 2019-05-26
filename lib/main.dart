@@ -4,6 +4,7 @@ import 'package:octane_gg/model/participant.dart';
 import 'package:octane_gg/screens/home.dart';
 import 'package:octane_gg/screens/players.dart';
 import 'package:octane_gg/screens/splash.dart';
+import 'package:octane_gg/screens/teams.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -38,7 +39,7 @@ class Octane extends StatelessWidget {
       ),
       routes: {
         '/players': (_) => PlayersScreen(),
-        // '/teams': TeamsScreen(),
+        '/teams': (_) => TeamsScreen(),
       },
     );
   }
