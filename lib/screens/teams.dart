@@ -32,6 +32,6 @@ class TeamsScreen extends StatelessWidget {
           }
         },
       ),
-    )
+    );
   }
 }

@@ -47,6 +47,27 @@ class API {
     }
   }
 
+  // Usage::
+  // final List<NewsArticle> _articles = await requestAll(
+  //   endpoint: news,
+  //   list: <NewsArticle>[],
+  //   entity: NewsArticle,
+  // );
+  // static Future<List<dynamic>> requestAll({
+  //   String endpoint,
+  //   List<dynamic> list,
+  //   dynamic entity,
+  // }) async {
+  //   final response = await request(endpoint);
+  //   final data = response['data'];
+
+  //   for (var e in data) {
+  //     list.add(fromJSON(e));
+  //   }
+
+  //   return list;
+  // }
+
   static bool successfulResponse(http.Response response) {
     if (response.statusCode == 200) {
       Map<String, dynamic> responseJSON = json.decode(response.body);
